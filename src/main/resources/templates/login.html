@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal podatkowy</title>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
+    <link th:href="@{fontello/user.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <div class="navbar-brand">
+            <img class="d-inline-block" width="96" th:src="@{img/orzel.svg}"  alt="">
+            <a th:href="@{/}"><h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="mr-auto header-element description pl-5">
+                <p class="h2 text-white text-center">Witaj na portalu podatkowym, tu rozliczysz swoje podatki</p>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" id="left">
+                        <p class="h4 text-white pt-5 text-center">Logujesz się do Krajowego Systemu Podatkowego </p>
+                        <a th:href="@{/registration}"><p class="h5 text-white text-center mt-5"><i class="icon-user-plus"></i> Uzyskaj dostęp</p></a>
+                        <a href="#"><p class="h5 text-white text-center mt-3"><i class="icon-doc-text"></i>Instrukcje </p></a>
+                        <a href="https://www.gov.pl/web/finanse"><img th:src="@{img/MF.svg}" class="img-fluid pt-4 text-center" style="display:block;margin:auto" alt="logo Ministerstwo finansów"></a>
+            </div>
+            <div class="col-md-9 fixed-posi"  id="form">
+                <form class="align-top border border-dark rounded p-3">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="NIP">NIP:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="NIP">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="password">Hasło :</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password">
+                            <small id="warunkiHasla" class="form-text text-muted">
+                                Hasło powinno mieć co najmniej 8 znaków, zawierać jedną dużą literę i jeden znak specjalny.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Wyślij</button>
+                            <button type="reset" class="btn btn-primary">Anuluj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer class="bg-dark">
+    <div class="container foot pt-0">
+        <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy; 2021.</p>
+    </div>
+</footer>
+        <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
