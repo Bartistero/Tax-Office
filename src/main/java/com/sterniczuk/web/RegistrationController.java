@@ -1,23 +1,19 @@
 package com.sterniczuk.web;
 
 import com.sterniczuk.MF.GetDataFromMf;
+import com.sterniczuk.StringGenerator;
+import com.sterniczuk.eMail.SendVerificationEmail;
 import com.sterniczuk.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.net.http.HttpRequest;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Controller
@@ -31,6 +27,8 @@ public class RegistrationController {
         return new User();
 
     }
+    @Autowired
+    SendVerificationEmail email;
 
     GetDataFromMf getDataFromMf = new GetDataFromMf();
 
@@ -52,6 +50,10 @@ public class RegistrationController {
                user.setCompanyName(map.get("name"));
                user.setREGON(map.get("REGON"));
                user.setAddress(map.get("address"));
+
+               String token = StringGenerator.ranomGenerator(40);
+               email.sendMail(user.getEMail(), "Potwierdzenie Logowania na Koncie Podatnika",email.registrationTemplate(token));
+
                return "redirect:/registration/accept";
            }
        }catch(Exception e){

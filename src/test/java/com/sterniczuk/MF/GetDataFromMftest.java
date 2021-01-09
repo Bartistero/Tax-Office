@@ -1,15 +1,9 @@
 package com.sterniczuk.MF;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sterniczuk.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.Test;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.rest.core.event.ExceptionEvent;
 
 import java.util.Map;
 @Slf4j

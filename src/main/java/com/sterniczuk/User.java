@@ -1,13 +1,9 @@
 package com.sterniczuk;
 
 import lombok.Data;
-import lombok.Generated;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
