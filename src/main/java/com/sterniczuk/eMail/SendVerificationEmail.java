@@ -43,7 +43,7 @@ public class SendVerificationEmail {
         String template =
                 "<h4 style=\"text-align:center;\">Witamy w gronie, posidaczy Portalu Podatkowego</h4>"
                 + "Kliknij w poniższy link aby aktywować swoje konto<br>"
-                        + "http://localhost:8080/registration/email?token=" + token
+                        + "http://localhost:8080/email/activate?token=" + token
                 +"<br>Ta wiadomoścć została wygenerowana automatycznie, prosimy na nią nie odpowiadać.";
         return template;
 

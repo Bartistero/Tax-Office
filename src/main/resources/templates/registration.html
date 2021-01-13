@@ -10,7 +10,7 @@
     <link th:href="@{fontello/user.css}" rel="stylesheet">
     <script th:src="@{JS/checkRegistrationForm.js}"></script>
 </head>
-<body onload="checkRegistation()">
+<body>
 <header>
     <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="navbar-brand">
@@ -84,6 +84,9 @@
                     </div>
                     <div>
                         <p class="h6" id="errors" style="color:red;"></p>
+                    </div>
+                    <div th:if="${Error}">
+                        <p class="h6" th:text="${Error}"></p>
                     </div>
                 </form>
                 </div>

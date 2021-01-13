@@ -1,13 +1,22 @@
 package com.sterniczuk;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.Date;
 
 @Data
 public class User {
+
+    private Long id;
+
+    private String createdAt;
+
     @NotNull
     @Size(min=11, max=11)
     private  String NIP;
@@ -26,6 +35,8 @@ public class User {
 
     @NotNull
     private  String address;
+
+    private String idStatus;
 
     public User() {
 

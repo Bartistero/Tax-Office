@@ -33,17 +33,17 @@
                         <a href="https://www.gov.pl/web/finanse"><img th:src="@{img/MF.svg}" class="img-fluid pt-4 text-center" style="display:block;margin:auto" alt="logo Ministerstwo finansów"></a>
             </div>
             <div class="col-md-9 fixed-posi"  id="form">
-                <form class="align-top border border-dark rounded p-3">
+                <form class="align-top border border-dark rounded p-3" method="POST" th:action="@{/login}" id="loginForm">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="NIP">NIP:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="NIP">
+                            <input type="text" class="form-control" id="NIP" name="NIP">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="password">Hasło :</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" class="form-control" id="password" name="password">
                             <small id="warunkiHasla" class="form-text text-muted">
                                 Hasło powinno mieć co najmniej 8 znaków, zawierać jedną dużą literę i jeden znak specjalny.
                             </small>
@@ -54,6 +54,9 @@
                             <button type="submit" class="btn btn-primary">Wyślij</button>
                             <button type="reset" class="btn btn-primary">Anuluj</button>
                         </div>
+                    </div>
+                    <div th:if="${param.error}">
+                        <p class="h4" style="color: red;">Logowanie nie udało się. Sprawdź podany login i hasło.</p>
                     </div>
                 </form>
             </div>
