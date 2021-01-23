@@ -51,7 +51,7 @@ public class RegistrationController {
 
     //User user, Errors errors, Model model
     @PostMapping
-    public String registrationProcess(@Valid @ModelAttribute User user, Errors errors, Model model,HttpSession session) {
+    public String registrationProcess(@Valid @ModelAttribute User user, Errors errors, Model model) {
 
                 model.addAttribute("user",user);
         try {
@@ -74,12 +74,12 @@ public class RegistrationController {
                         return "accept";
                     } else {
 
-                        throw new Exception("problem with saving data to the database");
+                        throw new Exception("Problem with save to DB");
                     }
 
                 } else {
 
-                    throw new Exception("The given tax identification number was not found");
+                    throw new Exception("user with this tax ID already exists");
                 }
             }
         } catch (Exception e) {
@@ -90,13 +90,13 @@ public class RegistrationController {
 
                 model.addAttribute("Error", "Użytkownik o podanym numerze NIP, już istnieje");
 
-            } else if (e.getMessage().equals("The given tax identification number was not found")) {
+            } else if (e.getMessage().equals("Problem with save to DB")) {
 
-                model.addAttribute("Użyktownik o podanych numerze NIP nie został odnaleziony w centralnej bazie podatników");
+                model.addAttribute("Wystąpił nieoczekiwany problem, skontaktuj się z infolinią podatkową");
 
             } else {
 
-                model.addAttribute("Error", "Wystąpił nieoczekiwany błąd, skonaktuj się z infolinią podatkową");
+                model.addAttribute("Error", "Użyktownik o podanych numerze NIP nie został odnaleziony w centralnej bazie podatników");
             }
         }
         return "registration";

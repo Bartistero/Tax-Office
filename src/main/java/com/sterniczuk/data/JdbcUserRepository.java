@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,9 +51,11 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
-    public User getUser(User user) {
+    public User getUser(String NIP) throws SQLException {
 
-        return null;
+
+       return  jdbc.queryForObject("Select * from Users where NIP= ?",this::mapToUser,NIP);
+
     }
 
 
@@ -71,8 +75,19 @@ public class JdbcUserRepository implements UserRepository {
             log.info(e.getMessage());
             return -2;
         }
-
-
     }
 
+    private User mapToUser(ResultSet rs,int rowNum) throws SQLException {
+
+
+        User user =  new User();
+             user.setId(rs.getLong("idUsers"));
+            user.setCreatedAt(rs.getString("createdAt"));
+            user.setNIP(rs.getString("NIP"));
+            user.setCompanyName(rs.getString("companyName"));
+            user.setREGON(rs.getString("REGON"));
+            user.setAddress(rs.getString("address"));
+            user.setIdStatus("1");
+        return user;
+    }
 }

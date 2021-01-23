@@ -17,7 +17,7 @@ public class EmailConfiguration {
         mailSender.setHost("server168390.nazwa.pl");
 
         mailSender.setUsername("portalpodatkowy@server168390.nazwa.pl");
-        mailSender.setPassword("zaq1@WSX");
+        mailSender.setPassword("qwertY123456");
 
         Properties props = mailSender.getJavaMailProperties();
         props.setProperty("mail.smtp.auth", "true");

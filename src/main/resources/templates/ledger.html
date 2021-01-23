@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal podatkowy</title>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/fontello/user.css}" rel="stylesheet">
+    <script th:src="@{/JS/checkRegistrationForm.js}"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <div class="navbar-brand">
+            <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{/img/orzel.svg}"  alt="">
+                <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="mr-auto header-element description pl-5">
+                <p class="h2 text-white text-center">Witaj na portalu podatkowym, tu rozliczysz swoje podatki</p>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="mr-auto header-element description pl-5">
+                <p class="h4 text-white">Witaj <span th:text="${user.companyName}"></span>!</p>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+        <div class="container">
+            <div id="row">
+                <div class="col-lg-3 pt-3">
+
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+
+            </div>
+        </div>
+</main>
+<footer class="bg-dark">
+    <div class="container foot pt-0">
+        <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy; 2021.</p>
+    </div>
+</footer>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

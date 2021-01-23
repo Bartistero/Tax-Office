@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/login")
                             .loginProcessingUrl("/login")
                             .usernameParameter("NIP")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/user/ksiega")
                 .failureUrl("/login?error=true")
                 .permitAll();
 

@@ -1,8 +1,11 @@
 package com.sterniczuk.web;
 
 import com.sterniczuk.User;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -12,27 +15,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+@SpringBootTest
 public class RegistrationControllerTest {
 
 
-   /* @Test
-    public String showRegistrationFormTest(Model model){
-
-    }*/
+   @Autowired
+   RegistrationController registrationController;
 
     @Test
     public void registrationProcessTest_Positive(){
 
         //given
-        RegistrationController registrationController = new RegistrationController();
         User user = this.prepareUser();
 
-
         //when
-        //String result = registrationController.registrationProcess(user, prepareErrors(),prepareModel() );
+        String result = registrationController.registrationProcess(user, prepareErrors(),prepareModel());
         //then
 
-       // Assertions.assertEquals(result,"registration");
+        Assertions.assertEquals(result,"accept");
     }
 
     private User prepareUser(){
@@ -44,6 +44,8 @@ public class RegistrationControllerTest {
 
         return user;
     }
+
+
     private Errors prepareErrors(){
         return new Errors() {
             @Override

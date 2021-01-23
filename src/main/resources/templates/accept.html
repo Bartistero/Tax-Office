@@ -15,7 +15,7 @@
     <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="navbar-brand">
             <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{/img/orzel.svg}"  alt="">
-           <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
+                <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
         </div>
         <div class="collapse navbar-collapse">
             <div class="mr-auto header-element description pl-5">
@@ -28,20 +28,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3" id="left">
-                        <p class="h4 text-white pt-5 text-center">Logujesz się do Krajowego Systemu Podatkowego </p>
-                        <a th:href="@{/registration}"><p class="h5 text-white text-center mt-5"><i class="icon-user-plus"></i> Uzyskaj dostęp</p></a>
-                        <a href="#"><p class="h5 text-white text-center mt-3"><i class="icon-doc-text"></i>Instrukcje </p></a>
-                        <a href="https://www.gov.pl/web/finanse"><img th:src="@{/img/MF.svg}" class="img-fluid pt-4 text-center" style="display:block;margin:auto" alt="logo Ministerstwo finansów"></a>
+                <p class="h4 text-white pt-5 text-center">Logujesz się do Krajowego Systemu Podatkowego </p>
+                <a th:href="@{/registration}"><p class="h5 text-white text-center mt-5"><i class="icon-user-plus"></i> Uzyskaj dostęp</p></a>
+                <a href="#"><p class="h5 text-white text-center mt-3"><i class="icon-doc-text"></i>Instrukcje </p></a>
+                <a href="https://www.gov.pl/web/finanse"><img th:src="@{/img/MF.svg}" class="img-fluid pt-4 text-center" style="display:block;margin:auto" alt="logo Ministerstwo finansów"></a>
             </div>
             <div class="col-md-9 fixed-posi mt-2"  id="form">
                 <p class="h3 text-center pt-5">Zostałeś zarejestrowany z następujący danymi, sprawdź maila aby potwierdzić swoje konto.</p>
                 <form class="align-top p-3" method="POST"  th:object="${user}" id="JsForm">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="NIP">*Podaj NIP:</label>
+                        <label class="col-sm-2 col-form-label" for="NIP">NIP:</label>
                         <div class="col-sm-10" id="NipError">
                             <input type="text" class="form-control"  th:field="${user.NIP}" readonly>
                         </div>
-                        <label class="col-sm-2 col-form-label" for="eMail">*Podaj E-Mail:</label>
+                        <label class="col-sm-2 col-form-label" for="eMail">E-Mail:</label>
                         <div class="col-sm-10 pt-1">
                             <input type="text" class="form-control"  th:field="*{eMail}" readonly>
                         </div>
@@ -62,9 +62,9 @@
                         <p class="h6" id="errors" style="color:red;"></p>
                     </div>
                 </form>
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
 </main>
@@ -73,6 +73,6 @@
         <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy; 2021.</p>
     </div>
 </footer>
-        <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
