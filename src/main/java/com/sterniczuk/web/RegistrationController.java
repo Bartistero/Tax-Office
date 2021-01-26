@@ -85,7 +85,6 @@ public class RegistrationController {
         } catch (Exception e) {
 
             log.info(e.getMessage());
-
             if (e.getMessage().equals("user with this tax ID already exists")) {
 
                 model.addAttribute("Error", "Użytkownik o podanym numerze NIP, już istnieje");

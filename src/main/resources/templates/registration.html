@@ -14,8 +14,8 @@
 <header>
     <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="navbar-brand">
-            <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{img/orzel.svg}"  alt="">
-           <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
+            <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{img/orzel.svg}" alt="">
+                <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
         </div>
         <div class="collapse navbar-collapse">
             <div class="mr-auto header-element description pl-5">
@@ -28,21 +28,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3" id="left">
-                        <p class="h4 text-white pt-5 text-center">Logujesz się do Krajowego Systemu Podatkowego </p>
-                        <a th:href="@{/registration}"><p class="h5 text-white text-center mt-5"><i class="icon-user-plus"></i> Uzyskaj dostęp</p></a>
-                        <a href="#"><p class="h5 text-white text-center mt-3"><i class="icon-doc-text"></i>Instrukcje </p></a>
-                        <a href="https://www.gov.pl/web/finanse"><img th:src="@{img/MF.svg}" class="img-fluid pt-4 text-center" style="display:block;margin:auto" alt="logo Ministerstwo finansów"></a>
+                <p class="h4 text-white pt-5 text-center">Logujesz się do Krajowego Systemu Podatkowego </p>
+                <a th:href="@{/registration}"><p class="h5 text-white text-center mt-5"><i class="icon-user-plus"></i>
+                    Uzyskaj dostęp</p></a>
+                <a href="#"><p class="h5 text-white text-center mt-3"><i class="icon-doc-text"></i>Instrukcje </p></a>
+                <a href="https://www.gov.pl/web/finanse"><img th:src="@{img/MF.svg}" class="img-fluid pt-4 text-center"
+                                                              style="display:block;margin:auto"
+                                                              alt="logo Ministerstwo finansów"></a>
             </div>
-            <div class="col-md-9 fixed-posi mt-2"  id="form">
+            <div class="col-md-9 fixed-posi mt-2" id="form">
                 <form class="align-top p-3" method="POST" th:action="@{/registration}" th:object="${user}" id="JsForm">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="NIP">*Podaj NIP:</label>
                         <div class="col-sm-10" id="NipError">
-                            <input type="text" class="form-control"  th:field="*{NIP}">
+                            <input type="text" class="form-control" th:field="*{NIP}">
                         </div>
                         <label class="col-sm-2 col-form-label" for="eMail">*Podaj E-Mail:</label>
                         <div class="col-sm-10 pt-1">
-                            <input type="text" class="form-control"  th:field="*{eMail}">
+                            <input type="text" class="form-control" th:field="*{eMail}">
                         </div>
                         <label class="col-sm-2 col-form-label" for="password1">*Hasło:</label>
                         <div class="col-sm-10 pt-1">
@@ -50,19 +53,19 @@
                         </div>
                         <label class="col-sm-2 col-form-label" for="password">*Powtórz Hasło:</label>
                         <div class="col-sm-10 pt-1">
-                            <input type="password" class="form-control"  th:field="*{password}">
+                            <input type="password" class="form-control" th:field="*{password}">
                         </div>
                         <label class="col-sm-2 col-form-label " for="companyName">Nazwa Firmy:</label>
                         <div class="col-sm-10 pt-1">
-                            <input type="text" class="form-control"  th:field="*{companyName}" readonly>
+                            <input type="text" class="form-control" th:field="*{companyName}" readonly>
                         </div>
                         <label class="col-sm-2 col-form-label" for="REGON">REGON:</label>
                         <div class="col-sm-10 pt-1">
-                            <input type="text" class="form-control"  th:field="*{REGON}" readonly>
+                            <input type="text" class="form-control" th:field="*{REGON}" readonly>
                         </div>
                         <label class="col-sm-2 col-form-label" for="address">Adres:</label>
                         <div class="col-sm-10 pt-1">
-                            <input type="text" class="form-control"  th:field="*{address}" readonly>
+                            <input type="text" class="form-control" th:field="*{address}" readonly>
                         </div>
                         <label class="col-sm-2 col-form-label" for="PZ">Potwierdź swoje dane za pomocą PZ:</label>
                         <div class="col-sm-10 mt-2 pt-1">
@@ -77,7 +80,9 @@
                         </div>
                         <div class="form-group row pl-5">
                             <div class="row">
-                                <button type="button" onclick="checkForm()" class="btn btn-primary col-6 pl-2">Rejetruj</button>
+                                <button type="button" onclick="checkForm()" class="btn btn-primary col-6 pl-2">
+                                    Rejestruj
+                                </button>
                                 <button type="reset" class="pl-1 ml-1 btn btn-primary col-5">Anuluj</button>
                             </div>
                         </div>
@@ -89,16 +94,17 @@
                         <p class="h6" th:text="${Error}"></p>
                     </div>
                 </form>
-                </div>
+            </div>
         </div>
     </div>
 
 </main>
 <footer class="bg-dark">
     <div class="container foot pt-0">
-        <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy; 2021.</p>
+        <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy;
+            2021.</p>
     </div>
 </footer>
-        <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -9,12 +9,13 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/fontello/user.css}" rel="stylesheet">
     <script th:src="@{/JS/checkRegistrationForm.js}"></script>
+    <script th:src="@{/JS/KPiR.js}"></script>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="navbar-brand">
-            <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{/img/orzel.svg}"  alt="">
+            <a th:href="@{/}"><img class="d-inline-block" width="96" th:src="@{/img/orzel.svg}" alt="">
                 <h1 class="navbar-text text-white">podatki.gov.pl</h1></a>
         </div>
         <div class="collapse navbar-collapse">
@@ -27,29 +28,148 @@
                 <p class="h4 text-white">Witaj <span th:text="${user.companyName}"></span>!</p>
             </div>
         </div>
+        <div class="collapse navbar-collapse">
+            <div class="mr-auto header-element description pl-5">
+                <a class="h4 text-white">Wyloguj</a>
+            </div>
+        </div>
     </nav>
 </header>
 <main>
-        <div class="container">
-            <div id="row">
-                <div class="col-lg-3 pt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1" id="left">
+                <div id="KPPIR">
+                    <a th:href="@{/user/ksiega}"><img th:src="@{/img/KPiR.png}" class="img-fluid pt-5 text-center"
+                                                      style="display:block;margin:auto;" alt="KPiR"></a>
+                </div>
+                <div id="VAT">
+                    <a th:href="@{/user/vat}"><img th:src="@{/img/VAT.png}" class="img-fluid pt-5 text-center"
+                                                   style="display:block;margin:auto" alt="VAT"></a>
+                </div>
+                <div id="Deklaracje">
+                    <a th:href="@{/user/deklaracje}"><img th:src="@{/img/deklaracje.png}"
+                                                          class="img-fluid pt-5 text-center"
+                                                          style="display:block;margin:auto" alt="deklaracje"></a>
+                </div>
+                <div id="Ustawienia">
+                    <a th:href="@{/user/ustawienia}"><img th:src="@{/img/ustawienia.png}"
+                                                          class="img-fluid pt-5 text-center"
+                                                          style="display:block;margin:auto" alt="Ustawienia"></a>
 
                 </div>
-                <div class="col-lg-3">
+            </div>
+            <div id="top-menu" class="col-md-12">
+                <div class="row">
+                    <div id="newInvoice" class="pr-5">
+                        <img th:src="@{/img/faktura.png}" onclick="newInvoice()" width="70px" class="img-fluid pt-3"
+                             style="display:block;margin:auto" alt="Nowa Faktura">
+                    </div>
+                    <div id="newCost" class="pr-5">
+                        <img th:src="@{/img/koszt.png}" onclick="newCost()" width="70px" class="img-fluid pt-3"
+                             style="display:block;margin:auto" alt="Nowa Faktura">
+                    </div>
+                    <div id="edit" class="pr-5">
+                        <a><img th:src="@{/img/edytowanie.png}" onclick="edit()" width="70px" class="img-fluid pt-3"
+                                style="display:block;margin:auto" alt="Edytowanie"></a>
+                    </div>
+                    ,
+                    <div class=" ml-auto mr-1 pt-5 h4" id="showMonth">
+                    </div>
+                    <script th:inline="javascript">
+                        var month = [[${month}]];
+                        setMonth(month);
+                    </script>
 
+                    <div class="dropdown pt-5 ml-3 mr-3">
+                        <button class="btn btn-primary dropdown-toggle " type="button" id="Month"
+                                data-toggle="dropdown">
+                            Zmień miesiąc
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=1">Styczeń</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=2">Luty</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=3">Marzec</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=4">Kwiecień</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=5">Maj</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=6">Czerwiec</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=7">Lipiec</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=8">Sierpień</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=9">Wrzesień</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=10">Październik</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=11">Listopad</a>
+                            <a class="dropdown-item" href="http://localhost:8080/user/ksiega?month=12">Grudzień</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3">
+                <hr style="color:black">
+            </div>
+            <div id="ledger" class="col-12 justify-content-center">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Przychód</th>
+                        <th>Koszt</th>
+                        <th>Nr faktury</th>
+                        <th>Kontrahent</th>
+                        <th>Address</th>
+                        <th>Wybór</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${receipts.empty}">
+                        <td colspan="2">Nie posiadasz jeszcze żadnych faktur.</td>
+                    </tr>
+                    <tr th:each="receipt,iterator : ${receipts}" th:id="${iterator.index+1}">
 
-                </div>
-
+                        <td><span th:text="${iterator.index+1}"></span></td>
+                        <td><span th:if="${receipt.type}=='1'" th:text="${receipt.nettoPrice}"
+                                  class="income"></span></td>
+                        <td><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
+                        </td>
+                        <td><span th:text="${receipt.invoiceNumber}"></span></td>
+                        <td><span th:text="${receipt.customerName}"></span></td>
+                        <td><span th:text="${receipt.address}"></span></td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" th:value="${receipt.invoiceNumber}"
+                                       name="invoice">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="h5">Suma</td>
+                        <td id="sumIncome" class="h5"></td>
+                        <td id="sumCost" class="h5"></td>
+                    </tr>
+                    <tr>
+                        <td class="h5">Dochód</td>
+                        <td id="SumIncom" class="h5">Dochód</td>
+                    </tr>
+                    <tr>
+                        <td class="h5">Prognozowany Podatek</td>
+                        <td id="pitTax" class="h5"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+    <div th:if="${receipts.empty}==false">
+        <script type="text/javascript" th:inline="javascript">
+            var size = [[${#lists.size(receipts)}]];
+            sum(size);
+
+        </script>
+    </div>
 </main>
-<footer class="bg-dark">
+<footer class="py-5">
     <div class="container foot pt-0">
-        <p class="m-0 text-center text-white h-4 mt-3">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy; 2021.</p>
+        <p class="m-0 text-center text-white h-4 mt-2">Ministerstwo Finansów. Wszystkie Prawa Zastrzeżone &copy;
+            2021.</p>
     </div>
 </footer>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

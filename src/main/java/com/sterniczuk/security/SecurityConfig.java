@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 
 @Slf4j
 @EnableWebSecurity
@@ -44,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/cosTam")
+                    .antMatchers("/user/**")
                      .access("hasRole('ROLE_USER')")
                         .antMatchers("/","/**").permitAll()
                             .antMatchers("/h2-console/**").permitAll()
@@ -55,8 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .usernameParameter("NIP")
                 .defaultSuccessUrl("/user/ksiega")
                 .failureUrl("/login?error=true")
-                .permitAll();
-
+                .permitAll()
+                .and()
+                    .logout()
+                        .logoutSuccessUrl("/login");
             http
                 .csrf()
                 .ignoringAntMatchers("/h2-console/**")
