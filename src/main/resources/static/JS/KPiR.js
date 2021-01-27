@@ -1,5 +1,5 @@
 function newInvoice() {
-    alert("Nowy rachunek");
+    document.getElementById("newInvoiceForm").showModal();
 }
 
 function newCost() {

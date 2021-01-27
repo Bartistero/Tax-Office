@@ -5,15 +5,17 @@ import com.sterniczuk.User;
 import com.sterniczuk.data.JdbcReceiptRepository;
 import com.sterniczuk.data.JdbcUserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -45,10 +47,29 @@ public class UserController {
             model.addAttribute("user", user);
             model.addAttribute("receipts", receipts);
             model.addAttribute("month", month);
+            model.addAttribute("newReceipt", new Receipt());
         } catch (Exception e) {
             return "redirect:/error";
         }
 
         return "ledger";
+    }
+
+    @PostMapping("/newInvoice")
+    public String addNewInvoice(@ModelAttribute @Valid Receipt receipt, Principal principal) {
+
+        Date date = new Date();
+        receipt.setDate(date);
+
+        try{
+            User user = userRepository.getUser(principal.getName());
+            receipt.setIdUser(user.getId().toString());
+            receipt.setType("1");
+            receiptRepository.addNewReceipt(receipt);
+        }catch (Exception e){
+            return "redirect:/error";
+        }
+
+        return "redirect:/user/ksiega";
     }
 }

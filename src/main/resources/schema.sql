@@ -41,6 +41,7 @@ create table if not exists Receipt(
     vat varchar(4) not null,
     Invoicetype varchar(4) not null,
     "DATE" Date not null,
+    customerNIP varchar(11),
 	primary key(idReceipt)
 
 );

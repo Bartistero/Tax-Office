@@ -44,4 +44,37 @@ public class JdbcReceiptRepositoryTest {
         Assertions.assertEquals(receipts.get(0).getIdUser(),"1");
 
     }
+    //public void addNewReceipt(Receipt receipt){
+
+    @Test
+    public void addNewReceiptTestPositive(){
+
+        //given
+        Receipt receipt = this.prepareReceipt();
+        final String user  = "Insert into Users(NIP,eMail,password,companyName, REGON, address, idStatus, createdAt) VALUES('7131774585','bartek114@autograf.pl','$2a$10$gLeX0VmwXxqDHpbiZ2Cb0.PBfPWHwFSTmxbHMFNOU3UPrZuv8RHrq','Bartosz Sterniczuk','430591583','MINKOWICE 194B, 21-007 MINKOWICE','1','23.01.2020')";
+        temaplate.update(user);
+        log.info(receipt.getInvoiceNumber());
+        //when
+        receiptRepository.addNewReceipt(receipt);
+
+        //then
+
+    }
+
+    private Receipt prepareReceipt(){
+
+        Date date = new Date();
+        Receipt receipt = new Receipt();
+        receipt.setInvoiceNumber("1");
+        receipt.setIdUser("1");
+        receipt.setCustomerName("Bartosz Sterniczuk");
+        receipt.setAddress("Politechnika Lubelska");
+        receipt.setNettoPrice(149.00);
+        receipt.setVAT(23);
+        receipt.setInvoiceNumber("1");
+        receipt.setDate(date);
+        receipt.setType("1");
+
+        return receipt;
+    }
 }

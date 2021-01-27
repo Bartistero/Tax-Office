@@ -58,8 +58,6 @@ public class JdbcUserRepository implements UserRepository {
 
     }
 
-
-
     @Override
     public int checkOneDataInDataBase(String table, String  attribute, String value){
 

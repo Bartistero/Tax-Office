@@ -7,10 +7,11 @@
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/invoice.css}" rel="stylesheet">
     <link th:href="@{/fontello/user.css}" rel="stylesheet">
     <script th:src="@{/JS/checkRegistrationForm.js}"></script>
     <script th:src="@{/JS/KPiR.js}"></script>
-    <link th:href="@{/css/invoice.css}" rel="stylesheet">
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.js}"></script>
 </head>
 <body>
 <header>
@@ -82,8 +83,8 @@
                         var month = [[${month}]];
                         setMonth(month);
 
-                    </script>
 
+                    </script>
                     <div class="dropdown pt-5 ml-3 mr-3">
                         <button class="btn btn-primary dropdown-toggle " type="button" id="Month"
                                 data-toggle="dropdown">
@@ -106,108 +107,10 @@
                     </div>
                 </div>
                 <hr style="color:black">
-            </div>
-            <div id="ledger" class="col-12 justify-content-center">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Przychód</th>
-                        <th>Koszt</th>
-                        <th>Nr faktury</th>
-                        <th>Data</th>
-                        <th>NIP kontrahenta</th>
-                        <th>Kontrahent</th>
-                        <th>Address</th>
-                        <th>Wybór</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${receipts.empty}">
-                        <td colspan="2">Nie posiadasz jeszcze żadnych faktur.</td>
-                    </tr>
-                    <tr th:each="receipt,iterator : ${receipts}" th:id="${iterator.index+1}">
 
-                        <td><span th:text="${iterator.index+1}"></span></td>
-                        <td><span th:if="${receipt.type}=='1'" th:text="${receipt.nettoPrice}"
-                                  class="income"></span></td>
-                        <td><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
-                        </td>
-                        <td><span th:text="${receipt.invoiceNumber}"></span></td>
-                        <td><span th:text="${receipt.date}"></span></td>
-                        <td><span th:if="${receipt.customerNIP != null}" th:text="${receipt.customerNIP}"></span></td>
-                        <td><span th:text="${receipt.customerName}"></span></td>
-                        <td><span th:text="${receipt.address}"></span></td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" th:value="${receipt.invoiceNumber}"
-                                       name="invoice">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="h5">Suma</td>
-                        <td id="sumIncome" class="h5"></td>
-                        <td id="sumCost" class="h5"></td>
-                    </tr>
-                    <tr>
-                        <td class="h5">Dochód</td>
-                        <td id="SumIncom" class="h5">Dochód</td>
-                    </tr>
-                    <tr>
-                        <td class="h5">Prognozowany Podatek</td>
-                        <td id="pitTax" class="h5"></td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
-    <div th:if="${receipts.empty}==false">
-        <script type="text/javascript" th:inline="javascript">
-            var size = [[${#lists.size(receipts)}]];
-            sum(size);
-
-        </script>
-    </div>
-    <dialog id="newInvoiceForm">
-        <div class="container">
-            <form method="POST" th:action="@{/user/ksiega/newInvoice}" th:object="${newReceipt}">
-                <div class="form-group row pt-3 pl-5 pr-5">
-                    <div class="col-12">
-                        <p class="h4 text-center mt-6">Wystawianie nowej faktury</p>
-                    </div>
-                    <label class="col-sm-2 col-form-label " for="NIP">*Podaj NIP:</label>
-                    <div class="col-sm-10" id="NipError">
-                        <input type="text" class="form-control" th:field="*{customerNIP}">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="customerName">Podaj nazwę odbiorcy:</label>
-                    <div class="col-sm-10 pt-1">
-                        <input type="text" class="form-control" th:field="*{customerName}">
-                    </div>
-                    <label class="col-sm-2 col-form-label " for="address">Podaj adres:</label>
-                    <div class="col-sm-10 pt-1">
-                        <input type="text" class="form-control" th:field="*{address}">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="nettoPrice">Cena netto:</label>
-                    <div class="col-sm-10 pt-1">
-                        <input type="text" class="form-control" th:field="*{nettoPrice}">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="VAT">Stawka VAT:</label>
-                    <div class="col-sm-10 pt-1">
-                        <input type="text" class="form-control" th:field="*{VAT}">
-                    </div>
-                        <input type="text" hidden th:filed="*{type}" value="1">
-                    <div class="row pt-5 ml-auto mr-1">
-                        <button type="submit" class="btn btn-primary col-6" onclick="checkNewInvoice()">
-                            Wystaw
-                        </button>
-                        <button type="reset" class="pl-1 ml-1 btn btn-primary col-5">Anuluj</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </dialog>
 </main>
 <footer class="py-5">
     <div class="container foot pt-0">

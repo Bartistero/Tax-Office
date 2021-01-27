@@ -3,6 +3,7 @@ package com.sterniczuk;
 import lombok.Data;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -16,18 +17,24 @@ public class Receipt {
 
     private String idUser;
 
+    @NotNull
     private String customerName;
 
+    @NotNull
     private String address;
 
-    private float nettoPrice;
+    @NotNull
+    private double nettoPrice;
 
+    @NotNull
     private int VAT;
 
+    @NotNull
     private String type;
 
     private Date date;
 
-    private String month;
+    @NotNull
+    private String customerNIP;
 
 }
