@@ -208,6 +208,44 @@
             </form>
         </div>
     </dialog>
+    <dialog id="newCostForm">
+        <div class="container">
+            <form method="POST" th:action="@{/user/ksiega/newCost}" th:object="${newReceipt}">
+                <div class="form-group row pt-3 pl-5 pr-5">
+                    <div class="col-12">
+                        <p class="h4 text-center mt-6">Wprowadź nowy koszt</p>
+                    </div>
+                    <label class="col-sm-2 col-form-label " for="NIP">*Podaj NIP:</label>
+                    <div class="col-sm-10" id="NipError">
+                        <input type="text" class="form-control" th:field="*{customerNIP}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="customerName">Podaj nazwę odbiorcy:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{customerName}">
+                    </div>
+                    <label class="col-sm-2 col-form-label " for="address">Podaj adres:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{address}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="nettoPrice">Cena netto:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{nettoPrice}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="VAT">Stawka VAT:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{VAT}">
+                    </div>
+                    <input type="text" hidden th:filed="*{type}" value="1">
+                    <div class="row pt-5 ml-auto mr-1">
+                        <button type="submit" class="btn btn-primary col-6" onclick="checkNewInvoice()">
+                            Wystaw
+                        </button>
+                        <button type="reset" class="pl-1 ml-1 btn btn-primary col-5">Anuluj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </dialog>
 </main>
 <footer class="py-5">
     <div class="container foot pt-0">

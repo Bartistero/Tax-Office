@@ -72,4 +72,22 @@ public class UserController {
 
         return "redirect:/user/ksiega";
     }
+
+    @PostMapping("/newCost")
+    public String addNewCost(@ModelAttribute @Valid Receipt receipt, Principal principal) {
+
+        Date date = new Date();
+        receipt.setDate(date);
+
+        try{
+            User user = userRepository.getUser(principal.getName());
+            receipt.setIdUser(user.getId().toString());
+            receipt.setType("0");
+            receiptRepository.addNewReceipt(receipt);
+        }catch (Exception e){
+            return "redirect:/error";
+        }
+
+        return "redirect:/user/ksiega";
+    }
 }

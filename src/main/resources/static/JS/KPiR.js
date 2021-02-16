@@ -3,7 +3,7 @@ function newInvoice() {
 }
 
 function newCost() {
-    alert("Nowy koszt");
+    document.getElementById("newCostForm").showModal();
 }
 
 function edit() {
