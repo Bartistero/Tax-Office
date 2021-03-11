@@ -1,21 +1,10 @@
-#newInvoiceForm{
+.newForm{
     height: 50%;
     margin: auto;
-  border-radius: 25px;
-  border: solid black;
-  width: 50%;
+    border-radius: 25px;
+    border: solid black;
+    width: 50%;
 }
-#newInvoiceForm form{
-margin-top :35px;
-}
-
-#newCostForm{
-    height: 50%;
-    margin: auto;
-  border-radius: 25px;
-  border: solid black;
-  width: 50%;
-}
-#newCostForm form{
-margin-top :35px;
+.newForm form{
+    margin-top :5%;
 }

@@ -7,7 +7,35 @@ function newCost() {
 }
 
 function edit() {
-    alert("edycja");
+
+    checked = -1;
+    len = document.getElementsByName("invoice")
+
+    for(i = 0; i<len.length ; i++){
+    if(len[i].checked){
+            checked = i;
+            break;
+    }
+    }
+
+    if(checked == -1){
+    alert("Proszę zaznaczyć, fakturę do edycji.")
+    }else{
+
+        var price = document.querySelector("#a1 #price span").innerText;
+        var invoiceNumber = document.querySelector("#a1 #invoiceNumber span").innerText;
+        var date  = document.querySelector("#a1 #date span").innerText;
+        var customerNIP  = document.querySelector("#a1 #customerNIP span").innerText;
+        var customerName  = document.querySelector("#a1 #customerName span").innerText;
+        var address  = document.querySelector("#a1 #address span").innerText;
+
+        document.querySelector("#newEditForm  #customerNIP").value = customerNIP;
+        document.querySelector("#newEditForm  #customerName").value = customerName;
+        document.querySelector("#newEditForm  #address").value = address;
+        document.querySelector("#newEditForm  #nettoPrice").value = price;
+       document.getElementById("newEditForm").showModal();
+    }
+
 }
 
 function sum() {

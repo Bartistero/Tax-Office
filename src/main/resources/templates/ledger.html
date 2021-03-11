@@ -126,18 +126,18 @@
                     <tr th:if="${receipts.empty}">
                         <td colspan="2">Nie posiadasz jeszcze żadnych faktur.</td>
                     </tr>
-                    <tr th:each="receipt,iterator : ${receipts}" th:id="${iterator.index+1}">
+                    <tr th:each="receipt,iterator : ${receipts}"  th:id="'a' + ${iterator.index+1}">
 
                         <td><span th:text="${iterator.index+1}"></span></td>
-                        <td><span th:if="${receipt.type}=='1'" th:text="${receipt.nettoPrice}"
+                        <td id="price"><span th:if="${receipt.type}=='1'" th:text="${receipt.nettoPrice}"
                                   class="income"></span></td>
-                        <td><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
+                        <td id="price"><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
                         </td>
-                        <td><span th:text="${receipt.invoiceNumber}"></span></td>
-                        <td><span th:text="${receipt.date}"></span></td>
-                        <td><span th:if="${receipt.customerNIP != null}" th:text="${receipt.customerNIP}"></span></td>
-                        <td><span th:text="${receipt.customerName}"></span></td>
-                        <td><span th:text="${receipt.address}"></span></td>
+                        <td id="invoiceNumber"><span th:text="${receipt.invoiceNumber}"></span></td>
+                        <td id="date"><span th:text="${receipt.date}"></span></td>
+                        <td id="customerNIP"><span th:if="${receipt.customerNIP != null}" th:text="${receipt.customerNIP}"></span></td>
+                        <td id="customerName"><span th:text="${receipt.customerName}"></span></td>
+                        <td id="address"><span th:text="${receipt.address}"></span></td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" th:value="${receipt.invoiceNumber}"
@@ -170,7 +170,7 @@
 
         </script>
     </div>
-    <dialog id="newInvoiceForm">
+    <dialog id="newInvoiceForm" class="newForm">
         <div class="container">
             <form method="POST" th:action="@{/user/ksiega/newInvoice}" th:object="${newReceipt}">
                 <div class="form-group row pt-3 pl-5 pr-5">
@@ -208,7 +208,7 @@
             </form>
         </div>
     </dialog>
-    <dialog id="newCostForm">
+    <dialog id="newCostForm" class="newForm">
         <div class="container">
             <form method="POST" th:action="@{/user/ksiega/newCost}" th:object="${newReceipt}">
                 <div class="form-group row pt-3 pl-5 pr-5">
@@ -216,7 +216,7 @@
                         <p class="h4 text-center mt-6">Wprowadź nowy koszt</p>
                     </div>
                     <label class="col-sm-2 col-form-label " for="NIP">*Podaj NIP:</label>
-                    <div class="col-sm-10" id="NipError">
+                    <div class="col-sm-10" id="NipCostForm">
                         <input type="text" class="form-control" th:field="*{customerNIP}">
                     </div>
                     <label class="col-sm-2 col-form-label" for="customerName">Podaj nazwę odbiorcy:</label>
@@ -239,6 +239,40 @@
                     <div class="row pt-5 ml-auto mr-1">
                         <button type="submit" class="btn btn-primary col-6" onclick="checkNewInvoice()">
                             Wystaw
+                        </button>
+                        <button type="reset" class="pl-1 ml-1 btn btn-primary col-5">Anuluj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <dialog id="newEditForm" class="newForm">
+        <div class="container">
+            <form method="POST" th:action="@{/user/ksiega/editForm}" th:object="${newReceipt}">
+                <div class="form-group row pt-3 pl-5 pr-5">
+                    <div class="col-12">
+                        <p class="h4 text-center mt-6">Wprowadź nowy koszt</p>
+                    </div>
+                    <label class="col-sm-2 col-form-label " for="NIP">*Podaj NIP:</label>
+                    <div class="col-sm-10" id="NIPEditForm">
+                            <input type="text" class="form-control" th:field="*{customerNIP}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="customerName">Podaj nazwę odbiorcy:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{customerName}">
+                    </div>
+                    <label class="col-sm-2 col-form-label " for="address">Podaj adres:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{address}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="nettoPrice">Cena netto:</label>
+                    <div class="col-sm-10 pt-1">
+                        <input type="text" class="form-control" th:field="*{nettoPrice}">
+                    </div>
+                    <input type="text" hidden th:filed="*{type}" value="1">
+                    <div class="row pt-5 ml-auto mr-1">
+                        <button type="submit" class="btn btn-primary col-6" onclick="checkNewInvoice()">
+                            Aktualizuj
                         </button>
                         <button type="reset" class="pl-1 ml-1 btn btn-primary col-5">Anuluj</button>
                     </div>
