@@ -21,21 +21,30 @@ function edit() {
     if(checked == -1){
     alert("Proszę zaznaczyć, fakturę do edycji.")
     }else{
-
-        var price = document.querySelector("#a1 #price span").innerText;
-        var invoiceNumber = document.querySelector("#a1 #invoiceNumber span").innerText;
-        var date  = document.querySelector("#a1 #date span").innerText;
-        var customerNIP  = document.querySelector("#a1 #customerNIP span").innerText;
-        var customerName  = document.querySelector("#a1 #customerName span").innerText;
-        var address  = document.querySelector("#a1 #address span").innerText;
+    checked += 1;
+        checked = "a"+checked;
+        var price = document.querySelector("#" + checked + " #price span");
+        var typeOfInvoice = 1;
+        if(price == null){
+          var price = document.querySelector("#" + checked + " #priceCost span");
+                  var typeOfInvoice = 0;
+        }
+        price = price.innerText;
+        var invoiceNumber = document.querySelector("#" + checked + " #invoiceNumber span").innerText;
+        var date  = document.querySelector("#" + checked + " #date span").innerText;
+        var customerNIP  = document.querySelector("#" + checked + " #customerNIP span").innerText;
+        var customerName  = document.querySelector("#" + checked + " #customerName span").innerText;
+        var address  = document.querySelector("#" + checked + " #address span").innerText;
+        var invoiceNumber = document.querySelector("#" + checked + " #invoiceNumber span").innerText;
 
         document.querySelector("#newEditForm  #customerNIP").value = customerNIP;
         document.querySelector("#newEditForm  #customerName").value = customerName;
         document.querySelector("#newEditForm  #address").value = address;
         document.querySelector("#newEditForm  #nettoPrice").value = price;
-       document.getElementById("newEditForm").showModal();
+        document.querySelector("#newEditForm  #invoiceNumber").value = invoiceNumber;
+        document.querySelector("#newEditForm  #type").value = typeOfInvoice;
+        document.getElementById("newEditForm").showModal();
     }
-
 }
 
 function sum() {

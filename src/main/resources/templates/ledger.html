@@ -131,7 +131,7 @@
                         <td><span th:text="${iterator.index+1}"></span></td>
                         <td id="price"><span th:if="${receipt.type}=='1'" th:text="${receipt.nettoPrice}"
                                   class="income"></span></td>
-                        <td id="price"><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
+                        <td id="priceCost"><span th:if="${receipt.type}=='0'" th:text="${receipt.nettoPrice}" class="cost"></span>
                         </td>
                         <td id="invoiceNumber"><span th:text="${receipt.invoiceNumber}"></span></td>
                         <td id="date"><span th:text="${receipt.date}"></span></td>
@@ -249,6 +249,8 @@
     <dialog id="newEditForm" class="newForm">
         <div class="container">
             <form method="POST" th:action="@{/user/ksiega/editForm}" th:object="${newReceipt}">
+                <input type="hidden" th:field="*{invoiceNumber}">
+                <input type="hidden" th:field="*{type}">
                 <div class="form-group row pt-3 pl-5 pr-5">
                     <div class="col-12">
                         <p class="h4 text-center mt-6">Wprowadź nowy koszt</p>

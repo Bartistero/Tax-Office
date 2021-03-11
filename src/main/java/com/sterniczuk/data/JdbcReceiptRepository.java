@@ -30,11 +30,12 @@ public class JdbcReceiptRepository{
 
         public void addNewReceipt(Receipt receipt){
 
-                String invoiceNumber = (String)jdbc.queryForObject("SELECT MAX(invoiceNumber) from receipt where InvoiceType='1'", String.class);
+                String invoiceNumber = (String)jdbc.queryForObject("SELECT MAX(invoiceNumber) from receipt where InvoiceType=?", String.class,receipt.getType());
 
                 boolean isNull = false;
                 try {
-                    invoiceNumber.equalsIgnoreCase(null);
+                        System.out.println(invoiceNumber);
+                    invoiceNumber.isEmpty();
                 } catch (NullPointerException npe) {
                     isNull = true;
                 }
@@ -42,7 +43,9 @@ public class JdbcReceiptRepository{
                 if(isNull){
                         receipt.setInvoiceNumber("1");
                 }else{
-                        receipt.setInvoiceNumber(invoiceNumber);
+                       int number =  Integer.parseInt(invoiceNumber);
+                       number += 1;
+                        receipt.setInvoiceNumber(Integer.toString(number));
                 }
 
 
@@ -57,6 +60,19 @@ public class JdbcReceiptRepository{
                         receipt.getType(),
                         receipt.getDate(),
                         receipt.getCustomerNIP());
+        }
+
+        public void editReceipt(Receipt receipt){
+                final String sql = "update receipt set customerNip =?, customerName=?, address=?, nettoPrice=? where invoiceNumber=? and invoiceType=?";
+               int rows =  jdbc.update(sql, receipt.getCustomerNIP(),receipt.getCustomerName(),receipt.getAddress(), receipt.getNettoPrice(),receipt.getInvoiceNumber(),receipt.getType());
+                System.out.println(
+                        "numer rachunku: "  + receipt.getInvoiceNumber() +
+                                " typ rachunku:  " + receipt.getType() +
+                                " NIP: " + receipt.getCustomerNIP() +
+                                " Nazwa: " + receipt.getCustomerName() +
+                                " address: " + receipt.getAddress() +
+                                " cena: " + receipt.getNettoPrice() +
+                                " zakutalizowano: " + rows);
         }
 
         private Receipt mapRowToReceipt(ResultSet rs, int rowNum) throws SQLException {
@@ -75,4 +91,5 @@ public class JdbcReceiptRepository{
 
                 return receipt;
         }
+
 }

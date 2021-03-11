@@ -90,4 +90,11 @@ public class UserController {
 
         return "redirect:/user/ksiega";
     }
+
+    @PostMapping("/editForm")
+    public String editInvoice(@ModelAttribute @Valid Receipt receipt, Principal principal) {
+
+        receiptRepository.editReceipt(receipt);
+        return "redirect:/user/ksiega";
+    }
 }
